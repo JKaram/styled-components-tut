@@ -1,12 +1,12 @@
 import React from 'react';
-import Button from 'components/common/Button'
+import { Button } from 'components/common'
 
 
 function App() {
   return (
     <h1>
       Yoyo
-      <Button />
+      <Button>TEST</Button>
     </h1>
   );
 }
