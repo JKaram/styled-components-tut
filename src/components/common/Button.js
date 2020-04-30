@@ -2,14 +2,13 @@ import styled, { css } from "styled-components";
 
 const Button = styled.button`
   color: white;
-  background: ${(p) => (p.secondary ? "#000" : "#f8049c")};
+  background: ${(p) => (p.secondary ? "#fdd54f" : "#f8049c")};
   font-weight: bold;
 
   ${(p) =>
     p.large
       ? css`
           padding: 10px;
-          border-radius: 1.5em;
           font-size: 1.5em;
         `
       : css`

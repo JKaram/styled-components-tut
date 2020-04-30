@@ -29,7 +29,6 @@ const Menu = styled.nav`
 
   @media (min-width: 768px) {
     display: flex;
-    background-color: #fff;
     left: initial;
     top: initial;
     position: relative;
