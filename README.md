@@ -1,8 +1,9 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Styled Components Tutorial
 
-## Available Scripts
+Following a Udemy Tutorial
+**https://www.udemy.com/course/react-styled-components/**
 
-In the project directory, you can run:
+![](https://raw.githubusercontent.com/JKaram/styled-components-tut/master/docs/exampleGif.gif)
 
 ### `npm start`
 
