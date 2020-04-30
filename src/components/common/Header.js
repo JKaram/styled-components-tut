@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 
 import styled from "styled-components";
-import { Link as ReactRouterDomLink } from "react-router-dom";
+import { Link as ReactRouterDomLink, useLocation } from "react-router-dom";
 
 const HeaderWrapper = styled.header`
   height: 60px;
@@ -12,19 +12,31 @@ const HeaderWrapper = styled.header`
   position: fixed;
   top: 0;
 
-  background: #efefef;
+  background-image: linear-gradient(to right, #f8049c, #fdd54f);
+  border-bottom: 3px solid #fdd54f;
 `;
 
 const Menu = styled.nav`
-  display: flex;
-  position: relative;
-  width: initial;
-  border-bottom: none;
-  margin: auto 0 auto auto;
+  display: ${(p) => (p.open ? "block" : "none")};
+  position: absolute;
+  width: 100%;
+  top: 60px;
+  left: 0;
   font-family: "Open Sans";
-  background: "none";
-  left: initial;
-  top: initial;
+  padding: 8px;
+  box-sizing: border-box;
+  border-bottom: 3px solid #fdd54f;
+
+  @media (min-width: 768px) {
+    display: flex;
+    background-color: #fff;
+    left: initial;
+    top: initial;
+    position: relative;
+    width: initial;
+    border-bottom: none;
+    margin: auto 0 auto auto;
+  }
 `;
 
 const Link = ({ isActive, children, ...props }) => {
@@ -37,16 +49,42 @@ const StyledLink = styled(Link)`
   text-align: center;
   box-sizing: border-box;
   margin: auto 0;
+  color: black;
 
   font-weight: ${(p) => (p.isActive ? "bold" : "")};
 `;
 
+const MobileMenuIcon = styled.div`
+  margin: auto 0 auto auto;
+  width: 25px;
+  > div {
+    height: 3px;
+    background: #000;
+    margin: 5px 0;
+    width: 100%;
+  }
+
+  @media (min-width: 768px) {
+    display: none;
+  }
+`;
+
 export function Header() {
+  const { pathname } = useLocation();
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <HeaderWrapper>
-      <Menu>
-        <StyledLink to="/">Home</StyledLink>
-        <StyledLink to="/login" isActive>
+      <MobileMenuIcon onClick={() => setMenuOpen((s) => !s)}>
+        <div />
+        <div />
+        <div />
+      </MobileMenuIcon>
+      <Menu open={menuOpen}>
+        <StyledLink to="/" isActive={pathname === "/"}>
+          Home
+        </StyledLink>
+        <StyledLink to="/login" isActive={pathname === "/login"}>
           Login
         </StyledLink>
       </Menu>
