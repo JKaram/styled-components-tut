@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
-import styled from "styled-components";
+import styled, { ThemeContext } from "styled-components";
 import { Link as ReactRouterDomLink, useLocation } from "react-router-dom";
+import { Toggle } from "components/common";
 
 const HeaderWrapper = styled.header`
   height: 60px;
@@ -12,8 +13,12 @@ const HeaderWrapper = styled.header`
   position: fixed;
   top: 0;
 
-  background-image: linear-gradient(to right, #f8049c, #fdd54f);
-  border-bottom: 3px solid #fdd54f;
+  background-image: linear-gradient(
+    to right,
+    ${(p) => p.theme.primaryColor},
+    ${(p) => p.theme.secondaryColor}
+  );
+  border-bottom: 3px solid ${(p) => p.theme.secondaryColor};
 `;
 
 const Menu = styled.nav`
@@ -25,7 +30,7 @@ const Menu = styled.nav`
   font-family: "Open Sans";
   padding: 8px;
   box-sizing: border-box;
-  border-bottom: 3px solid #fdd54f;
+  border-bottom: 3px solid ${(p) => p.theme.secondaryColor};
 
   @media (min-width: 768px) {
     display: flex;
@@ -71,6 +76,7 @@ const MobileMenuIcon = styled.div`
 export function Header() {
   const { pathname } = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
+  const { id, setTheme } = useContext(ThemeContext);
 
   return (
     <HeaderWrapper>
@@ -86,6 +92,7 @@ export function Header() {
         <StyledLink to="/login" isActive={pathname === "/login"}>
           Login
         </StyledLink>
+        <Toggle isActive={id === "dark"} onToggle={setTheme} />
       </Menu>
     </HeaderWrapper>
   );
